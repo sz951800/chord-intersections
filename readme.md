@@ -18,6 +18,7 @@ input1 = [
     (0.78, 0.8, 0.9, 1.0, 1.2, 1.47, 1.77, 1.8, 3.0, 3.92),
     ('s1', 's5', 's3', 's4', 'e5', 's2', 'e1', 'e4', 'e3', 'e2')
 ]
+```
 
 ## Approach
 
@@ -34,7 +35,17 @@ The algorithm executes in several steps:
 
 ## Implementation Details
 
-The implementation involves creating a dictionary to track the start and end points of each chord, then iterating over each pair of chords to check for intersections. The intersection logic checks if one chord starts or ends within the span of another chord but does not lie entirely within it.
+The implementation involves creating a dictionary to track the start and end points of each chord, then iterating over each pair of chords to check for intersections.
+
+To determine if two chords intersect, the following condition is used:
+
+```python
+if (c1_start <= c2_start <= c1_end) ^ (c1_start <= c2_end <= c1_end):
+    num_intersections += 1
+```
+
+This condition checks if one chord (c1) partially overlaps with another chord (c2). Specifically, it checks if the starting point of c2 falls within the span of c1 (between c1's start and end) or if the ending point of c2 falls within the span of c1. The ^ operator is used for exclusive OR, which ensures that we count the intersection only once for each pair of intersecting chords.
+
 
 ## Complexity Analysis
 
